@@ -169,12 +169,6 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="MCAL\Adc\static\Adc.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\Adc\static\Adc.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="MCAL\Dio\Dio.c">
       <SubType>compile</SubType>
     </Compile>
@@ -199,6 +193,9 @@
     <Compile Include="MCAL\Gpt\static\Gpt.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="MCAL\Pwm\config\Pwm_lcfg.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="MCAL\Pwm\config\Pwm_Pcfg.h">
       <SubType>compile</SubType>
     </Compile>
@@ -206,12 +203,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="MCAL\Pwm\static\Pwm.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\Wdg\static\Wdg.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCAL\Wdg\static\Wdg.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Util\ATmega32_Cfg.h">
@@ -231,19 +222,14 @@
     <Folder Include="HAL\Ultra_Sonic" />
     <Folder Include="HAL\Switch" />
     <Folder Include="MCAL\" />
-    <Folder Include="MCAL\Adc\" />
-    <Folder Include="MCAL\Adc\config\" />
-    <Folder Include="MCAL\Adc\static\" />
     <Folder Include="MCAL\Dio\" />
     <Folder Include="MCAL\Ext_Interrupts\" />
     <Folder Include="MCAL\Gpt\" />
     <Folder Include="MCAL\Gpt\config\" />
     <Folder Include="MCAL\Gpt\static\" />
-    <Folder Include="MCAL\Wdg" />
     <Folder Include="MCAL\Pwm\" />
     <Folder Include="MCAL\Pwm\config\" />
     <Folder Include="MCAL\Pwm\static\" />
-    <Folder Include="MCAL\Wdg\static" />
     <Folder Include="Util\" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />

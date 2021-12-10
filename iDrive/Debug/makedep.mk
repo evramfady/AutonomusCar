@@ -12,8 +12,6 @@ HAL\Ultra_Sonic\Ultrasonic.c
 
 main.c
 
-MCAL\Adc\static\Adc.c
-
 MCAL\Dio\Dio.c
 
 MCAL\Ext_Interrupts\Ext_Interrupts.c
@@ -22,7 +20,7 @@ MCAL\Gpt\config\Gpt_Lcfg.c
 
 MCAL\Gpt\static\Gpt.c
 
-MCAL\Pwm\static\Pwm.c
+MCAL\Pwm\config\Pwm_lcfg.c
 
-MCAL\Wdg\static\Wdg.c
+MCAL\Pwm\static\Pwm.c
 

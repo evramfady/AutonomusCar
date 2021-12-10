@@ -17,14 +17,14 @@
 int main(void)
 {
 	Sw_init(PORTD_DIR_REG,SW1);
-	Servo_Init(PORTD_DIR_REG,DIO_PIN7);
+    ServoMotor_Init();
 	Ultrasonic_Init();
 	motor_init();
 	uint8 flag =0;
 	uint16 left=0;
 	uint16 right=0;
 	
-	Sw_StateEnum_t  Sw_State = Sw_StateGet(PORTD_INP_REG,SW1);
+	/*Sw_StateEnum_t  Sw_State = Sw_StateGet(PORTD_INP_REG,SW1);
 
 	switch (Sw_State)
 	{
@@ -36,20 +36,24 @@ int main(void)
 		break;
 		default:
 		break;
-	}
+	}*/
 	
 	
 	
 	while(1)
 	{
 		
-	if (flag==1)
+	/*if (flag==1)
      {
-		 Servo_Rotate(PORTD_OUT_REG,DIO_PIN7,90);
+		 ServoMotor_Rotate90();
+		 
 		 left=Measure_Distance();
-		 Servo_Rotate(PORTD_OUT_REG,DIO_PIN7,-90);
+		 
+		 ServoMotor_Rotateneg90();
+		 
 		 right=Measure_Distance();
-		 Servo_Rotate(PORTD_OUT_REG,DIO_PIN7,0);
+		 
+		 ServoMotor_Rotate0();
 		 
 		 
 		if (left>=right)
@@ -64,7 +68,17 @@ int main(void)
 		motor_forward();
 	    } else {
 		motor_brake();
-	} 
+	} */
+	
+	
+	ServoMotor_Rotate90();
+	_delay_ms(2000U);
+	ServoMotor_Rotate0();
+	_delay_ms(2000U);
+	ServoMotor_Rotateneg90();
+		_delay_ms(2000U);
+
+	
   }
 }
 
