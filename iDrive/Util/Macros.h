@@ -1,15 +1,15 @@
 /*
  * Macros.h
  *
- * Created: 12/5/2021 7:08:51 PM
- *  Author: evram 
+ * Created: 12/9/2021 3:41:32 AM
+ *  Author: evram
  */ 
 
 
 #ifndef MACROS_H_
 #define MACROS_H_
 
-										/* BIT MANPULATING MACROS */
+/* BIT MANPULATING MACROS */
 
 /* This line sets a certain bit in any register*/
 #define SET_BIT(Reg,Bit_no) ((Reg)|=(1U<<(Bit_no)))

@@ -1,13 +1,14 @@
 /*
  * Ext_Interrupts.c
  *
- * Created: 12/5/2021 4:04:12 PM
- *  Author: evram 
+ * Created: 12/9/2021 4:02:40 AM
+ *  Author: evram
  */ 
 
-#include "Ext_Interrupts.h"
+
+#include "Atmega_Cnfg.h"
 #include "Macros.h"
-#include "ATmega32_Cfg.h"
+#include "Ext_Interrupts.h"
 
 static void Ext_Interrupt_ModeSet(Ext_InterruptModeEnum_t Mode, uint8 bit0, uint8 bit1);
 

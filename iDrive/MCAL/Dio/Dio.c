@@ -1,14 +1,14 @@
 /*
  * Dio.c
  *
- * Created: 12/5/2021 7:09:28 PM
- *  Author: evram 
+ * Created: 12/9/2021 4:05:36 AM
+ *  Author: evram
  */ 
 
+#include "Atmega_Cnfg.h"
 #include "Dio.h"
 #include "Macros.h"
-#include "Std_Types.h"
-#include "ATmega32_Cfg.h"
+#include "Std_types.h"
 
 void Dio_ChannelDirectionSet(volatile uint8 * Port_reg, DioPinEnum_t Channel, DioPinDirectionEnum_t Direction)
 {
@@ -44,7 +44,7 @@ void Dio_ChannelWrite(volatile uint8 * Port_reg, DioPinEnum_t Channel, DioPinSta
 		break;
 		default:
 		break;
-	}	
+	}
 }
 void Dio_ChannelToggle(volatile uint8 * Port_reg, DioPinEnum_t Channel)
 {
@@ -60,4 +60,4 @@ uint8 Dio_PortRead(volatile uint8 * Port_reg)
 {
 	uint8 u8LocalPortValue = *Port_reg;
 	return u8LocalPortValue;
-}  
+}

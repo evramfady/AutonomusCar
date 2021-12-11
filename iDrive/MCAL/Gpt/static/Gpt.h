@@ -1,22 +1,22 @@
 /*
  * Gpt.h
  *
- * Created: 12/5/2021 10:26:34 PM
- *  Author: evram 
+ * Created: 12/9/2021 3:55:07 AM
+ *  Author: evram
  */ 
 
 
 #ifndef GPT_H_
 #define GPT_H_
 
-#include "Std_Types.h"
 #include "Gpt_Pcfg.h"
+#include "Std_types.h"
 
 typedef enum
 {
 	GPT_TIMER0,
 	GPT_TIMER1,
-	GPT_TIMER2	
+	GPT_TIMER2
 }Gpt_ChannelType;
 
 typedef enum
@@ -40,7 +40,7 @@ typedef enum
 typedef enum
 {
 	GPT_INTERRUPT_DISABLE,
-	GPT_INTERRUPT_ENABLE	
+	GPT_INTERRUPT_ENABLE
 }Gpt_IntStateType;
 
 typedef uint16 Gpt_ValueType;
@@ -51,7 +51,7 @@ typedef enum
 	GPT_STATUS_RUNNING
 }Gpt_StatusType;
 
-typedef struct  
+typedef struct
 {
 	Gpt_ChannelType	 GptNo;
 	Gpt_ModeType     GptMode;
@@ -64,5 +64,8 @@ void Gpt_Init(const Gpt_ConfigType *ConfigPtr);
 Gpt_StatusType Gpt_StatusGet(Gpt_ChannelType Channel);
 
 extern const Gpt_ConfigType gaStrGpt_Configuration[GPT_CHANNELS_NUM];
+
+
+
 
 #endif /* GPT_H_ */

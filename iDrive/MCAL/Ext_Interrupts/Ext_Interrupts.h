@@ -1,8 +1,8 @@
 /*
  * Ext_Interrupts.h
  *
- * Created: 12/5/2021 4:03:50 PM
- *  Author: evram 
+ * Created: 12/9/2021 4:02:59 AM
+ *  Author: evram
  */ 
 
 
@@ -24,7 +24,7 @@
 typedef enum
 {
 	GLOBAL_INT_DISABLE,
-	GLOBAL_INT_ENABLE	
+	GLOBAL_INT_ENABLE
 }GlobalInt_StateEnum_t;
 
 typedef enum
@@ -45,4 +45,7 @@ typedef enum
 void Ext_Interrupts_Enable(Ext_InterruptSourceEnum_t Source, Ext_InterruptModeEnum_t Mode);
 void EXT_Interrupts_Disable(Ext_InterruptSourceEnum_t Source);
 void Global_Interrupts_StateSet(GlobalInt_StateEnum_t State);
+
+
+
 #endif /* EXT_INTERRUPTS_H_ */

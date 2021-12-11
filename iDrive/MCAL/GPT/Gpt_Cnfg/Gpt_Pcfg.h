@@ -1,8 +1,8 @@
 /*
  * Gpt_Pcfg.h
  *
- * Created: 12/5/2021 8:44:02 PM
- *  Author: evram 
+ * Created: 12/9/2021 3:55:25 AM
+ *  Author: evram
  */ 
 
 
@@ -24,5 +24,8 @@
 #define TIMER1_OVF_INT_ENABLE_BIT			(2U)
 #define TIMER1_CMP_MATCH_A_INT_ENABLE_BIT	(4U)
 #define TIMER1_CMP_MATCH_B_INT_ENABLE_BIT	(3U)
+
+
+
 
 #endif /* GPT_PCFG_H_ */

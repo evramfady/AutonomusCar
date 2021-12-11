@@ -1,17 +1,17 @@
 /*
  * Gpt_Lcfg.c
  *
- * Created: 12/5/2021 11:00:19 PM
- *  Author: evram 
+ * Created: 12/9/2021 3:55:52 AM
+ *  Author: evram
  */ 
 
 #include "Gpt.h"
 
-const Gpt_ConfigType gaStrGpt_Configuration[GPT_CHANNELS_NUM] = 
+const Gpt_ConfigType gaStrGpt_Configuration[GPT_CHANNELS_NUM] =
 {
 	{
 		GPT_TIMER0,
-	    GPT_NORMAL_MODE,
+		GPT_NORMAL_MODE,
 		GPT_NO_PRESCALE,
 		GPT_INTERRUPT_ENABLE,
 		0U  /* Not in CTC Mode */

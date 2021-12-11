@@ -1,21 +1,22 @@
 /*
- * Sw.c
+ * switch.c
  *
- * Created: 9/12/2021 9:25:26 PM
- *  Author: Abdelaziz Moustafa
+ * Created: 12/9/2021 4:46:18 AM
+ *  Author: evram
  */ 
 
 #include "Dio.h"
-#include "Sw.h"
-#include "ATmega32_Cfg.h"
+#include "switch.h"
+#include "Atmega_Cnfg.h"
 #include <util/delay.h>
 
 #define DEBOUNCE_PERIOD (20U)
 
-DioPinStateEnum_t Sw_PrevState = SW_RELEASED;
+DioPinStateEnum_t Sw_PrevState;
 void Sw_init(volatile uint8 *Sw_Reg, SwEnumt_t Sw_no)
 {
-	Dio_ChannelDirectionSet   (Sw_Reg, Sw_no, DIO_INPUT);
+	Dio_ChannelDirectionSet(Sw_Reg, Sw_no, DIO_INPUT);
+	Sw_PrevState = Dio_ChannelRead(Sw_Reg, Sw_no);
 }
 Sw_StateEnum_t Sw_StateGet(volatile uint8 *Sw_Reg, SwEnumt_t Sw_no)
 {
@@ -37,3 +38,4 @@ Sw_StateEnum_t Sw_StateGet(volatile uint8 *Sw_Reg, SwEnumt_t Sw_no)
 	}
 	return LocalSwState;
 }
+
