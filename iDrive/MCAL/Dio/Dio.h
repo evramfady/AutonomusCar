@@ -1,15 +1,19 @@
 /*
  * Dio.h
  *
- * Created: 12/9/2021 4:05:24 AM
- *  Author: evram
+ * Created: 9/12/2021 7:09:14 PM
+ *  Author: Abdelaziz Moustafa
  */ 
 
 
 #ifndef DIO_H_
 #define DIO_H_
 
-/* Defines an enumerated list of all the channels (pins) on the MCU device. */
+#include "Std_Types.h"
+
+/**
+ *  Defines an enumerated list of all the channels (pins) on the MCU device.
+ */
 typedef enum
 {
     DIO_PIN0,
@@ -22,14 +26,18 @@ typedef enum
     DIO_PIN7
 }DioPinEnum_t;
 
-/* Defines the possible states for a digital output pin. */
+/**
+ * Defines the possible states for a digital output pin.
+ */
  typedef enum
  {
     DIO_LOW,             /** Defines digital state ground */
     DIO_HIGH             /** Defines digital state power */
  }DioPinStateEnum_t;
 
-/*  Defines the GPIO direction : Input or output  */
+/**
+ *  Defines the GPIO direction : Input or output
+ */
 typedef enum
 {
     DIO_INPUT,
@@ -42,7 +50,5 @@ void Dio_ChannelWrite(volatile uint8 * Port_reg, DioPinEnum_t Channel, DioPinSta
 void Dio_ChannelToggle(volatile uint8 * Port_reg, DioPinEnum_t Channel);
 void Dio_PortWrite(volatile uint8 * Port_reg, uint8 Value);
 uint8 Dio_PortRead(volatile uint8 * Port_reg);
-
-
 
 #endif /* DIO_H_ */

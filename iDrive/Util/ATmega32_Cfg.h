@@ -1,13 +1,13 @@
 /*
- * Atmega_Cnfg.h
+ * ATmega32_Cfg.h
  *
- * Created: 12/9/2021 3:42:00 AM
- *  Author: evram
+ * Created: 12/5/2021 9:35:26 PM
+ *  Author: evram 
  */ 
 
 
-#ifndef ATMEGA_CNFG_H_
-#define ATMEGA_CNFG_H_
+#ifndef ATMEGA32_CFG_H_
+#define ATMEGA32_CFG_H_
 
 #include "Std_Types.h"
 
@@ -41,7 +41,7 @@
 #define ADC_DATA_HIGH_REG       ((volatile uint8*)0x25U)  /* ADCH */
 #define ADC_DATA_LOW_REG        ((volatile uint8*)0x24U)  /* ADCL */
 
-/* Special Function Registers */
+/* Special Function Registers */ 
 #define SPECIAL_FUNC_IO_REG     ((volatile uint8*)0x50U)  /* SFIOR */
 
 /* Timer0 Registers */
@@ -58,10 +58,13 @@
 #define TIMER1_CMP_A_HIGH_REG   ((volatile uint8 *)0x4BU)
 #define TIMER1_CMP_B_LOW_REG    ((volatile uint8 *)0x48U)
 #define TIMER1_CMP_B_HIGH_REG   ((volatile uint8 *)0x49U)
+#define TIMER1_INP_CAP_LOW_REG  ((volatile uint8 *)0x46U)
+#define TIMER1_INP_CAP_HIGH_REG ((volatile uint8 *)0x47U)
 
 #define TIMER_INT_MASK_REG     ((volatile uint8 *)0x59U)
 #define TIMER_INT_FLAG_REG     ((volatile uint8 *)0x58U)
 
+/* Watchdog timer Register */
+#define WDG_CTRL_REG           ((volatile uint8 *)0x41U)
 
-
-#endif /* ATMEGA_CNFG_H_ */
+#endif /* ATMEGA32_CFG_H_ */

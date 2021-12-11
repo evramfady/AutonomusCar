@@ -1,13 +1,13 @@
 /*
  * Gpt.c
  *
- * Created: 12/9/2021 3:54:48 AM
- *  Author: evram
+ * Created: 12/5/2021 10:26:51 PM
+ *  Author: evram 
  */ 
 
-#include "Macros.h"
-#include "Atmega_Cnfg.h"
 #include "Gpt.h"
+#include "ATmega32_Cfg.h"
+#include "Macros.h"
 
 void Gpt_Init(const Gpt_ConfigType *ConfigPtr)
 {

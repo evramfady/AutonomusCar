@@ -1,8 +1,8 @@
 /*
- * Std_types.h
+ * Std_Types.h
  *
- * Created: 12/9/2021 3:41:13 AM
- *  Author: evram
+ * Created: 12/5/2021 7:08:22 PM
+ *  Author: evram 
  */ 
 
 
@@ -28,7 +28,6 @@ typedef signed long long    sint64;
 typedef float       float32;
 typedef double      float64;
 typedef long double float80;
-
 
 
 #endif /* STD_TYPES_H_ */

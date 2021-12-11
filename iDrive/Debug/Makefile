@@ -33,31 +33,36 @@ LINKER_SCRIPT_DEP:=
 
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
+../HAL/ \
 ../HAL/Motor_Driver \
-../HAL/Servo \
-../HAL/Switch \
+../HAL/servo \
 ../HAL/Ultra_Sonic \
-../MCAL \
-../HAL \
-../MCAL/GPT \
-../MCAL/Ext_Interrupts \
-../MCAL/Dio \
-../MCAL/GPT/Gpt_Cnfg \
-../MCAL/GPT/static \
-../Util
+../HAL/Switch \
+../MCAL/ \
+../MCAL/Dio/ \
+../MCAL/Ext_Interrupts/ \
+../MCAL/Gpt/ \
+../MCAL/Gpt/config/ \
+../MCAL/Gpt/static/ \
+../MCAL/Pwm/ \
+../MCAL/Pwm/config/ \
+../MCAL/Pwm/static/ \
+../Util/
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
-../HAL/Motor_Driver/Motor_Driver.c \
-../HAL/Servo/servo.c \
-../HAL/Switch/switch.c \
-../HAL/Ultra_Sonic/Ultra_Sonic.c \
+../HAL/Motor_Driver/motor_driver.c \
+../HAL/servo/servo.c \
+../HAL/Switch/Sw.c \
+../HAL/Ultra_Sonic/Ultrasonic.c \
 ../main.c \
 ../MCAL/Dio/Dio.c \
 ../MCAL/Ext_Interrupts/Ext_Interrupts.c \
-../MCAL/GPT/Gpt_Cnfg/Gpt_Lcfg.c \
-../MCAL/GPT/static/Gpt.c
+../MCAL/Gpt/config/Gpt_Lcfg.c \
+../MCAL/Gpt/static/Gpt.c \
+../MCAL/Pwm/config/Pwm_lcfg.c \
+../MCAL/Pwm/static/Pwm.c
 
 
 PREPROCESSING_SRCS += 
@@ -67,48 +72,56 @@ ASM_SRCS +=
 
 
 OBJS +=  \
-HAL/Motor_Driver/Motor_Driver.o \
-HAL/Servo/servo.o \
-HAL/Switch/switch.o \
-HAL/Ultra_Sonic/Ultra_Sonic.o \
+HAL/Motor_Driver/motor_driver.o \
+HAL/servo/servo.o \
+HAL/Switch/Sw.o \
+HAL/Ultra_Sonic/Ultrasonic.o \
 main.o \
 MCAL/Dio/Dio.o \
 MCAL/Ext_Interrupts/Ext_Interrupts.o \
-MCAL/GPT/Gpt_Cnfg/Gpt_Lcfg.o \
-MCAL/GPT/static/Gpt.o
+MCAL/Gpt/config/Gpt_Lcfg.o \
+MCAL/Gpt/static/Gpt.o \
+MCAL/Pwm/config/Pwm_lcfg.o \
+MCAL/Pwm/static/Pwm.o
 
 OBJS_AS_ARGS +=  \
-HAL/Motor_Driver/Motor_Driver.o \
-HAL/Servo/servo.o \
-HAL/Switch/switch.o \
-HAL/Ultra_Sonic/Ultra_Sonic.o \
+HAL/Motor_Driver/motor_driver.o \
+HAL/servo/servo.o \
+HAL/Switch/Sw.o \
+HAL/Ultra_Sonic/Ultrasonic.o \
 main.o \
 MCAL/Dio/Dio.o \
 MCAL/Ext_Interrupts/Ext_Interrupts.o \
-MCAL/GPT/Gpt_Cnfg/Gpt_Lcfg.o \
-MCAL/GPT/static/Gpt.o
+MCAL/Gpt/config/Gpt_Lcfg.o \
+MCAL/Gpt/static/Gpt.o \
+MCAL/Pwm/config/Pwm_lcfg.o \
+MCAL/Pwm/static/Pwm.o
 
 C_DEPS +=  \
-HAL/Motor_Driver/Motor_Driver.d \
-HAL/Servo/servo.d \
-HAL/Switch/switch.d \
-HAL/Ultra_Sonic/Ultra_Sonic.d \
+HAL/Motor_Driver/motor_driver.d \
+HAL/servo/servo.d \
+HAL/Switch/Sw.d \
+HAL/Ultra_Sonic/Ultrasonic.d \
 main.d \
 MCAL/Dio/Dio.d \
 MCAL/Ext_Interrupts/Ext_Interrupts.d \
-MCAL/GPT/Gpt_Cnfg/Gpt_Lcfg.d \
-MCAL/GPT/static/Gpt.d
+MCAL/Gpt/config/Gpt_Lcfg.d \
+MCAL/Gpt/static/Gpt.d \
+MCAL/Pwm/config/Pwm_lcfg.d \
+MCAL/Pwm/static/Pwm.d
 
 C_DEPS_AS_ARGS +=  \
-HAL/Motor_Driver/Motor_Driver.d \
-HAL/Servo/servo.d \
-HAL/Switch/switch.d \
-HAL/Ultra_Sonic/Ultra_Sonic.d \
+HAL/Motor_Driver/motor_driver.d \
+HAL/servo/servo.d \
+HAL/Switch/Sw.d \
+HAL/Ultra_Sonic/Ultrasonic.d \
 main.d \
 MCAL/Dio/Dio.d \
 MCAL/Ext_Interrupts/Ext_Interrupts.d \
-MCAL/GPT/Gpt_Cnfg/Gpt_Lcfg.d \
-MCAL/GPT/static/Gpt.d
+MCAL/Gpt/config/Gpt_Lcfg.d \
+MCAL/Gpt/static/Gpt.d \
+MCAL/Pwm/config/Pwm_lcfg.d \
+MCAL/Pwm/static/Pwm.d
 
 OUTPUT_FILE_PATH +=iDrive.elf
 
@@ -124,66 +137,80 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
-HAL/Motor_Driver/Motor_Driver.o: ../HAL/Motor_Driver/Motor_Driver.c
+HAL/Motor_Driver/motor_driver.o: ../HAL/Motor_Driver/motor_driver.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../HAL/DC_Motor" -I"../HAL/LCD" -I"../HAL/Led" -I"../HAL/Pot" -I"../HAL/TempSensor" -I"../MCAL/Adc/config" -I"../MCAL/Adc/static" -I"../MCAL/Dio" -I"../MCAL/Ext_Interrupts" -I"../MCAL/Gpt/config" -I"../MCAL/Gpt/static" -I"../MCAL/Pwm/config" -I"../MCAL/Pwm/static" -I"../Util" -I"../MCAL/Wdg/config" -I"../MCAL/Wdg/static" -I"F:\embedded systems\avoiding car\avoiding car\HAL\Servo" -I"F:\embedded systems\avoiding car\avoiding car\HAL\Ultra_sonic" -I"../HAL/Ultra_Sonic" -I"../.." -I"../HAL/Switch" -I"../HAL/Motor_Driver"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-HAL/Servo/servo.o: ../HAL/Servo/servo.c
+HAL/servo/servo.o: ../HAL/servo/servo.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../HAL/DC_Motor" -I"../HAL/LCD" -I"../HAL/Led" -I"../HAL/Pot" -I"../HAL/TempSensor" -I"../MCAL/Adc/config" -I"../MCAL/Adc/static" -I"../MCAL/Dio" -I"../MCAL/Ext_Interrupts" -I"../MCAL/Gpt/config" -I"../MCAL/Gpt/static" -I"../MCAL/Pwm/config" -I"../MCAL/Pwm/static" -I"../Util" -I"../MCAL/Wdg/config" -I"../MCAL/Wdg/static" -I"F:\embedded systems\avoiding car\avoiding car\HAL\Servo" -I"F:\embedded systems\avoiding car\avoiding car\HAL\Ultra_sonic" -I"../HAL/Ultra_Sonic" -I"../.." -I"../HAL/Switch" -I"../HAL/Motor_Driver"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-HAL/Switch/switch.o: ../HAL/Switch/switch.c
+HAL/Switch/Sw.o: ../HAL/Switch/Sw.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../HAL/DC_Motor" -I"../HAL/LCD" -I"../HAL/Led" -I"../HAL/Pot" -I"../HAL/TempSensor" -I"../MCAL/Adc/config" -I"../MCAL/Adc/static" -I"../MCAL/Dio" -I"../MCAL/Ext_Interrupts" -I"../MCAL/Gpt/config" -I"../MCAL/Gpt/static" -I"../MCAL/Pwm/config" -I"../MCAL/Pwm/static" -I"../Util" -I"../MCAL/Wdg/config" -I"../MCAL/Wdg/static" -I"F:\embedded systems\avoiding car\avoiding car\HAL\Servo" -I"F:\embedded systems\avoiding car\avoiding car\HAL\Ultra_sonic" -I"../HAL/Ultra_Sonic" -I"../.." -I"../HAL/Switch" -I"../HAL/Motor_Driver"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-HAL/Ultra_Sonic/Ultra_Sonic.o: ../HAL/Ultra_Sonic/Ultra_Sonic.c
+HAL/Ultra_Sonic/Ultrasonic.o: ../HAL/Ultra_Sonic/Ultrasonic.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../HAL/DC_Motor" -I"../HAL/LCD" -I"../HAL/Led" -I"../HAL/Pot" -I"../HAL/TempSensor" -I"../MCAL/Adc/config" -I"../MCAL/Adc/static" -I"../MCAL/Dio" -I"../MCAL/Ext_Interrupts" -I"../MCAL/Gpt/config" -I"../MCAL/Gpt/static" -I"../MCAL/Pwm/config" -I"../MCAL/Pwm/static" -I"../Util" -I"../MCAL/Wdg/config" -I"../MCAL/Wdg/static" -I"F:\embedded systems\avoiding car\avoiding car\HAL\Servo" -I"F:\embedded systems\avoiding car\avoiding car\HAL\Ultra_sonic" -I"../HAL/Ultra_Sonic" -I"../.." -I"../HAL/Switch" -I"../HAL/Motor_Driver"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 ./main.o: .././main.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../HAL/DC_Motor" -I"../HAL/LCD" -I"../HAL/Led" -I"../HAL/Pot" -I"../HAL/TempSensor" -I"../MCAL/Adc/config" -I"../MCAL/Adc/static" -I"../MCAL/Dio" -I"../MCAL/Ext_Interrupts" -I"../MCAL/Gpt/config" -I"../MCAL/Gpt/static" -I"../MCAL/Pwm/config" -I"../MCAL/Pwm/static" -I"../Util" -I"../MCAL/Wdg/config" -I"../MCAL/Wdg/static" -I"F:\embedded systems\avoiding car\avoiding car\HAL\Servo" -I"F:\embedded systems\avoiding car\avoiding car\HAL\Ultra_sonic" -I"../HAL/Ultra_Sonic" -I"../.." -I"../HAL/Switch" -I"../HAL/Motor_Driver"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 MCAL/Dio/Dio.o: ../MCAL/Dio/Dio.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../HAL/DC_Motor" -I"../HAL/LCD" -I"../HAL/Led" -I"../HAL/Pot" -I"../HAL/TempSensor" -I"../MCAL/Adc/config" -I"../MCAL/Adc/static" -I"../MCAL/Dio" -I"../MCAL/Ext_Interrupts" -I"../MCAL/Gpt/config" -I"../MCAL/Gpt/static" -I"../MCAL/Pwm/config" -I"../MCAL/Pwm/static" -I"../Util" -I"../MCAL/Wdg/config" -I"../MCAL/Wdg/static" -I"F:\embedded systems\avoiding car\avoiding car\HAL\Servo" -I"F:\embedded systems\avoiding car\avoiding car\HAL\Ultra_sonic" -I"../HAL/Ultra_Sonic" -I"../.." -I"../HAL/Switch" -I"../HAL/Motor_Driver"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 MCAL/Ext_Interrupts/Ext_Interrupts.o: ../MCAL/Ext_Interrupts/Ext_Interrupts.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../HAL/DC_Motor" -I"../HAL/LCD" -I"../HAL/Led" -I"../HAL/Pot" -I"../HAL/TempSensor" -I"../MCAL/Adc/config" -I"../MCAL/Adc/static" -I"../MCAL/Dio" -I"../MCAL/Ext_Interrupts" -I"../MCAL/Gpt/config" -I"../MCAL/Gpt/static" -I"../MCAL/Pwm/config" -I"../MCAL/Pwm/static" -I"../Util" -I"../MCAL/Wdg/config" -I"../MCAL/Wdg/static" -I"F:\embedded systems\avoiding car\avoiding car\HAL\Servo" -I"F:\embedded systems\avoiding car\avoiding car\HAL\Ultra_sonic" -I"../HAL/Ultra_Sonic" -I"../.." -I"../HAL/Switch" -I"../HAL/Motor_Driver"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-MCAL/GPT/Gpt_Cnfg/Gpt_Lcfg.o: ../MCAL/GPT/Gpt_Cnfg/Gpt_Lcfg.c
+MCAL/Gpt/config/Gpt_Lcfg.o: ../MCAL/Gpt/config/Gpt_Lcfg.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../HAL/DC_Motor" -I"../HAL/LCD" -I"../HAL/Led" -I"../HAL/Pot" -I"../HAL/TempSensor" -I"../MCAL/Adc/config" -I"../MCAL/Adc/static" -I"../MCAL/Dio" -I"../MCAL/Ext_Interrupts" -I"../MCAL/Gpt/config" -I"../MCAL/Gpt/static" -I"../MCAL/Pwm/config" -I"../MCAL/Pwm/static" -I"../Util" -I"../MCAL/Wdg/config" -I"../MCAL/Wdg/static" -I"F:\embedded systems\avoiding car\avoiding car\HAL\Servo" -I"F:\embedded systems\avoiding car\avoiding car\HAL\Ultra_sonic" -I"../HAL/Ultra_Sonic" -I"../.." -I"../HAL/Switch" -I"../HAL/Motor_Driver"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-MCAL/GPT/static/Gpt.o: ../MCAL/GPT/static/Gpt.c
+MCAL/Gpt/static/Gpt.o: ../MCAL/Gpt/static/Gpt.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I".."  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../HAL/DC_Motor" -I"../HAL/LCD" -I"../HAL/Led" -I"../HAL/Pot" -I"../HAL/TempSensor" -I"../MCAL/Adc/config" -I"../MCAL/Adc/static" -I"../MCAL/Dio" -I"../MCAL/Ext_Interrupts" -I"../MCAL/Gpt/config" -I"../MCAL/Gpt/static" -I"../MCAL/Pwm/config" -I"../MCAL/Pwm/static" -I"../Util" -I"../MCAL/Wdg/config" -I"../MCAL/Wdg/static" -I"F:\embedded systems\avoiding car\avoiding car\HAL\Servo" -I"F:\embedded systems\avoiding car\avoiding car\HAL\Ultra_sonic" -I"../HAL/Ultra_Sonic" -I"../.." -I"../HAL/Switch" -I"../HAL/Motor_Driver"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+MCAL/Pwm/config/Pwm_lcfg.o: ../MCAL/Pwm/config/Pwm_lcfg.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../HAL/DC_Motor" -I"../HAL/LCD" -I"../HAL/Led" -I"../HAL/Pot" -I"../HAL/TempSensor" -I"../MCAL/Adc/config" -I"../MCAL/Adc/static" -I"../MCAL/Dio" -I"../MCAL/Ext_Interrupts" -I"../MCAL/Gpt/config" -I"../MCAL/Gpt/static" -I"../MCAL/Pwm/config" -I"../MCAL/Pwm/static" -I"../Util" -I"../MCAL/Wdg/config" -I"../MCAL/Wdg/static" -I"F:\embedded systems\avoiding car\avoiding car\HAL\Servo" -I"F:\embedded systems\avoiding car\avoiding car\HAL\Ultra_sonic" -I"../HAL/Ultra_Sonic" -I"../.." -I"../HAL/Switch" -I"../HAL/Motor_Driver"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+MCAL/Pwm/static/Pwm.o: ../MCAL/Pwm/static/Pwm.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\include" -I"../HAL/DC_Motor" -I"../HAL/LCD" -I"../HAL/Led" -I"../HAL/Pot" -I"../HAL/TempSensor" -I"../MCAL/Adc/config" -I"../MCAL/Adc/static" -I"../MCAL/Dio" -I"../MCAL/Ext_Interrupts" -I"../MCAL/Gpt/config" -I"../MCAL/Gpt/static" -I"../MCAL/Pwm/config" -I"../MCAL/Pwm/static" -I"../Util" -I"../MCAL/Wdg/config" -I"../MCAL/Wdg/static" -I"F:\embedded systems\avoiding car\avoiding car\HAL\Servo" -I"F:\embedded systems\avoiding car\avoiding car\HAL\Ultra_sonic" -I"../HAL/Ultra_Sonic" -I"../.." -I"../HAL/Switch" -I"../HAL/Motor_Driver"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32a -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.6.364\gcc\dev\atmega32a" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
